@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -29,6 +29,10 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run export
+
+    - name: Set Actions Allow Unsecure Commands
+        run: |
+          echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
     
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.5.9
