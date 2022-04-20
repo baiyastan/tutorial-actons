@@ -30,9 +30,8 @@ jobs:
     - run: npm run build
     - run: npm run export
 
-    - name: Set Actions Allow Unsecure Commands
-        run: |
-          echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
+    - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
+      run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
     
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.5.9
