@@ -18,19 +18,19 @@ jobs:
         matrix:
           os: [ubuntu-latest]
           node-version: [14.x]
-        steps:
-          - uses: actions/checkout@v2
-          - name: Use Node.js ${{ matrix.node-version }}
-            uses: actions/setup-node@v1
+          steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
               with:
                 node-version: ${{ matrix.node-version }}
-          - name: yarn install & test
-            run: |
-              yarn
-              yarn test
-            env:
-              CI: true
-build-and-deploy:
+            - name: yarn install & test
+              run: |
+                yarn
+                yarn test
+              env:
+                CI: true
+  build-and-deploy:
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -54,7 +54,7 @@ build-and-deploy:
           echo VERSION=$VERSION
           docker tag tutorial-actions $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
-- name: Deploy Container to Digitalocean
+      - name: Deploy Container to Digitalocean
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
